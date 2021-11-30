@@ -22,13 +22,14 @@ jobs:
           pip install codecov
           python scripts/ci/install
       - name: Install Thundra Python Agent
-        uses: thundra-io/thundra-foresight-python-action@action-experiment
+        uses: thundra-io/thundra-foresight-python-action@python-action
         with:
           apikey: ${{ secrets.THUNDRA_APIKEY }}
           project_id: ${{ secrets.THUNDRA_PROJECT_ID }}
+          agent_version: 3.0.0
       - name: Run tests
         run: |
-          python scripts/ci/run-integ-tests --with-cov --with-xdist
+          python scripts/ci/run-tests --with-cov --with-xdist
         env:
           THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.me/v1
           THUNDRA_AGENT_DEBUG_ENABLE: true

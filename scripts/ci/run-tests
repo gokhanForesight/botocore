@@ -72,9 +72,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "-j",
         "--junitxml",
-        default=["reports/result.xml"],
+        default=False,
         action="store_true",
-        nargs="*",
         help="Generate reports as xml.",
     )
     raw_args = parser.parse_args()

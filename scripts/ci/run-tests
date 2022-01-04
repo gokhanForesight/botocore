@@ -69,10 +69,19 @@ if __name__ == "__main__":
         action="store_true",
         help="Run default test-runner with parallelization.",
     )
+    parser.add_argument(
+        "-x",
+        "--junitxml",
+        default=["reports/result.xml"],
+        action="store_true",
+        nargs="*",
+        help="Generate reports as xml.",
+    )
     raw_args = parser.parse_args()
     test_runner, test_args, test_dirs = process_args(raw_args)
 
-    cmd = f"{test_runner} {test_args}{test_dirs} --junitxml=reports/result.xml"
+    cmd = f"{test_runner} {test_args}{test_dirs}"
+    print(f"test_args: {test_args}")
     print(f"Running {cmd}...")
     with cd(os.path.join(REPO_ROOT, "tests")):
         run(cmd)

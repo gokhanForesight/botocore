@@ -36,7 +36,6 @@ def process_args(args):
         test_args += "-n auto --dist=loadfile --maxprocesses=4 "
     if args.with_cov:
         test_args += f"--cov={PACKAGE} --cov-report xml "
-    test_args += "--junitxml=reports/results.xml "
     dirs = " ".join(args.test_dirs)
 
     return runner, test_args, dirs
@@ -68,6 +67,12 @@ if __name__ == "__main__":
         "--with-xdist",
         default=False,
         action="store_true",
+        help="Run default test-runner with parallelization.",
+    )
+    parser.add_argument(
+        "-j",
+        "--junitxml",
+        default="pytest",
         help="Run default test-runner with parallelization.",
     )
     raw_args = parser.parse_args()

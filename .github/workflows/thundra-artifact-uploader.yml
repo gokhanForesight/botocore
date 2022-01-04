@@ -1,0 +1,44 @@
+name: Thundra Artifact Uploader
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.7']
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Set up Python ${{ matrix.python-version }}'
+        uses: actions/setup-python@v2
+        with:
+          python-version: '${{ matrix.python-version }}'
+      - name: Install dependencies
+        run: |
+          pip install codecov
+          python scripts/ci/install
+      - run: npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
+      - run: npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
+      - name: Run tests
+        run: |
+          python scripts/ci/run-tests --with-cov --with-xdist --junitxml=reports/result.xml
+        env:
+          THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.me/v1
+          THUNDRA_AGENT_DEBUG_ENABLE: true
+      - name: install cli
+        run: npm install -g @thundra/artifact-upload
+      - name: cli upload reports
+        env:
+          THUNDRA_APIKEY: ${{ secrets.THUNDRA_APIKEY }}
+          THUNDRA_AGENT_TEST_PROJECT_ID: ${{ secrets.THUNDRA_PROJECT_ID }}
+          THUNDRA_UPLOADER_SIGNER_URL: ${{ secrets.THUNDRA_S3_SIGNER_URL }}
+        run: thundra upload -ud ./reports --type=TEST -f PYTHON
+      - name: Run codecov
+        run: |
+          rm tests/coverage.xml
+          mv tests/.coverage ./
+          codecov

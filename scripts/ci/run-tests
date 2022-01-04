@@ -71,7 +71,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-j",
-        "report",
+        "--junit",
         default="--junitxml=reports/result.xml",
         action="store_true",
         help="Run default test-runner with parallelization.",

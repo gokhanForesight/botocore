@@ -25,7 +25,7 @@ jobs:
       - run: npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Run tests
         run: |
-          python scripts/ci/run-tests --with-cov --with-xdist
+          python scripts/ci/run-tests --with-cov --with-xdist --junitxml
         env:
           THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.me/v1
           THUNDRA_AGENT_DEBUG_ENABLE: true

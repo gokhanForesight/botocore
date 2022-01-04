@@ -29,7 +29,7 @@ jobs:
           agent_version: 3.0.0
       - name: Run tests
         run: |
-          python scripts/ci/run-tests --with-cov --with-xdist --junitxml=reports/result.xml
+          python scripts/ci/run-tests --with-cov --with-xdist
         env:
           THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.me/v1
           THUNDRA_AGENT_DEBUG_ENABLE: true

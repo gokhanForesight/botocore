@@ -69,6 +69,13 @@ if __name__ == "__main__":
         action="store_true",
         help="Run default test-runner with parallelization.",
     )
+    parser.add_argument(
+        "-j",
+        "report",
+        default="--junitxml=reports/result.xml",
+        action="store_true",
+        help="Run default test-runner with parallelization.",
+    )
     raw_args = parser.parse_args()
     test_runner, test_args, test_dirs = process_args(raw_args)
 

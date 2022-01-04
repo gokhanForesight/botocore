@@ -25,7 +25,7 @@ jobs:
       - run: npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Run tests
         run: |
-          pytest -n auto --dist=loadfile --maxprocesses=4 --cov=botocore --cov-report xml unit/ functional/ --junitxml=reports/result.xml
+          pytest -n auto --dist=loadfile --maxprocesses=4 unit/ functional/ --junitxml=reports/result.xml
         env:
           THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.me/v1
           THUNDRA_AGENT_DEBUG_ENABLE: true
@@ -39,8 +39,3 @@ jobs:
         run: |
           ls -al
           thundra upload -ud ./reports --type=TEST -f PYTHON
-      - name: Run codecov
-        run: |
-          rm tests/coverage.xml
-          mv tests/.coverage ./
-          codecov

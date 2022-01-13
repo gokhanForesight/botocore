@@ -30,12 +30,13 @@ jobs:
           THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.me/v1
           THUNDRA_AGENT_DEBUG_ENABLE: true
       - name: install cli
-        run: npm install -g @thundra/artifact-upload
+        run: npm install -g @thundra/foresight-cli@1.0.4
       - name: cli upload reports
         env:
+          THUNDRA_UPLOADER_LOG_LEVEL: debug
           THUNDRA_APIKEY: ${{ secrets.THUNDRA_APIKEY }}
           THUNDRA_AGENT_TEST_PROJECT_ID: ${{ secrets.THUNDRA_PROJECT_ID }}
           THUNDRA_UPLOADER_SIGNER_URL: ${{ secrets.THUNDRA_S3_SIGNER_URL }}
         run: |
           ls -al ./tests
-          thundra upload -ud ./tests/reports --type=TEST -f PYTHON
+          thundra-foresight-cli upload-test -ud ./report -f JEST

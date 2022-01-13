@@ -39,4 +39,4 @@ jobs:
           THUNDRA_UPLOADER_SIGNER_URL: ${{ secrets.THUNDRA_S3_SIGNER_URL }}
         run: |
           ls -al ./tests
-          thundra-foresight-cli upload-test -ud ./report -f JEST
+          thundra-foresight-cli upload-test -ud ./reports -f JEST

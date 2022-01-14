@@ -35,7 +35,7 @@ jobs:
         env:
           THUNDRA_UPLOADER_LOG_LEVEL: debug
           THUNDRA_APIKEY: ${{ secrets.THUNDRA_APIKEY }}
-          THUNDRA_AGENT_TEST_PROJECT_ID: ${{ secrets.THUNDRA_PROJECT_ID }}
+          THUNDRA_FORESIGHT_PROJECT_ID: ${{ secrets.THUNDRA_PROJECT_ID }}
           THUNDRA_UPLOADER_SIGNER_URL: ${{ secrets.THUNDRA_S3_SIGNER_URL }}
         run: |
           ls -al ./tests

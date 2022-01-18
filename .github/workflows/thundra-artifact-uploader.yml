@@ -30,7 +30,7 @@ jobs:
           THUNDRA_AGENT_REPORT_REST_BASEURL: https://collector.thundra.me/v1
           THUNDRA_AGENT_DEBUG_ENABLE: true
       - name: install cli
-        run: npm install -g @thundra/foresight-cli@2.0.0
+        run: npm install -g @thundra/foresight-cli@1.0.15
       - name: cli upload reports
         env:
           THUNDRA_UPLOADER_LOG_LEVEL: debug

@@ -21,8 +21,8 @@ jobs:
         run: |
           pip install codecov
           python scripts/ci/install
-      - run: npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
-      - run: npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
+      #- run: npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
+      #- run: npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Run tests
         run: |
           python scripts/ci/run-tests --with-cov --with-xdist

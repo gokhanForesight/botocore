@@ -2,6 +2,9 @@ name: Thundra Artifact Uploader
 
 on:
   workflow_dispatch:
+  
+env:
+  FORESIGHT_UPLOADER_SIGNER_URL: https://upload.thundra.me
 
 jobs:
   build:

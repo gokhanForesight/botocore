@@ -24,8 +24,6 @@ jobs:
         run: |
           pip install codecov
           python scripts/ci/install
-      #- run: npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
-      #- run: npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Run tests
         run: |
           python scripts/ci/run-tests --with-cov --with-xdist
@@ -35,7 +33,7 @@ jobs:
           npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Create dummy Folder
         run: |
-          cp ./tests/reports/results.xml ./tests/results.xml
+          cp ./tests/reports/result.xml ./tests/result.xml
       - name: Foresight Action
         uses: thundra-io/foresight-test-kit-action@initial-action
         with:

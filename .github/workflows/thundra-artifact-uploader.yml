@@ -33,7 +33,7 @@ jobs:
       - name: Foresight Action
         uses: thundra-io/foresight-test-kit-action@initial-action
         with:
-          api_key: ${{ secrets.APIKEY }}
+          api_key: ${{ secrets.THUNDRA_APIKEY }}
           test_framework: pytest
           test_path: |
             ./tests/**

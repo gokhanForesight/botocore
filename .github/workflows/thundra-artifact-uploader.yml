@@ -33,7 +33,8 @@ jobs:
           npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Create dummy Folder
         run: |
-          cp ./tests/reports/result.xml ./tests/result.xml
+          mkdir ./tests/reports/abc
+          cp ./tests/reports/result.xml ./tests/reports/abc/result.xml
       - name: Foresight Action
         uses: thundra-io/foresight-test-kit-action@initial-action
         with:

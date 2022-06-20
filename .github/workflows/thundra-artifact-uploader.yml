@@ -33,7 +33,7 @@ jobs:
         run: |
           npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
           npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
-      - name Create dummy Folder
+      - name: Create dummy Folder
         run: |
           cp ./tests/reports/results.xml ./tests/results.xml
       - name: Foresight Action

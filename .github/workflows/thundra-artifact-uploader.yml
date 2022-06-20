@@ -33,11 +33,14 @@ jobs:
         run: |
           npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
           npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
+      - name Create dummy Folder
+        run: |
+          cp ./tests/reports/results.xml ./tests/results.xml
       - name: Foresight Action
         uses: thundra-io/foresight-test-kit-action@initial-action
         with:
           api_key: ${{ secrets.THUNDRA_APIKEY }}
           test_framework: pytest
           test_path: |
-            ./reports/**
+            ./tests/reports/**
           cli_version: 213.2.7

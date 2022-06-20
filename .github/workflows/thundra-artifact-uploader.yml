@@ -39,5 +39,5 @@ jobs:
           api_key: ${{ secrets.THUNDRA_APIKEY }}
           test_framework: pytest
           test_path: |
-            ./tests/**
+            ./reports/**
           cli_version: 213.2.7

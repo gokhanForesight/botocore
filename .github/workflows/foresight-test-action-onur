@@ -1,0 +1,45 @@
+name: Onur Foresight Test Action
+
+on:
+  workflow_dispatch:
+  
+env:
+  FORESIGHT_UPLOADER_SIGNER_URL: https://upload.thundra.me
+
+jobs:
+  build:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.7']
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Set up Python ${{ matrix.python-version }}'
+        uses: actions/setup-python@v2
+        with:
+          python-version: '${{ matrix.python-version }}'
+      - name: Install dependencies
+        run: |
+          pip install codecov
+          python scripts/ci/install
+      - name: Run tests
+        run: |
+          python scripts/ci/run-tests --with-cov --with-xdist
+      - name: Thundra Registry
+        run: |
+          npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
+          npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
+      - name: Create dummy Folder
+        run: |
+          mkdir ./tests/reports/abc
+          cp ./tests/reports/result.xml ./tests/reports/abc/result.xml
+      - name: Foresight Action
+        uses: thundra-io/foresight-test-kit-action@initial-action
+        with:
+          api_key: ${{ secrets.ONUR_API_KEY }}
+          test_framework: pytest
+          test_path: |
+            ./tests/reports/**
+          cli_version: 213.2.7

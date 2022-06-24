@@ -42,4 +42,4 @@ jobs:
           test_framework: pytest
           test_path: |
             ./tests/reports/**
-          cli_version: 213.2.7
+          cli_version: 213.3.8

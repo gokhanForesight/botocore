@@ -39,7 +39,8 @@ jobs:
         uses: thundra-io/foresight-test-kit-action@initial-action
         with:
           api_key: ${{ secrets.THUNDRA_APIKEY }}
-          test_format: pytest
+          test_framework: pytest
+          test_format: junit
           test_path: |
             ./tests/reports/**
-          cli_version: 213.3.8
+          cli_version: 213.3.10
